@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"	xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>Suppliers</title>
+	</head>
+	<body>
+	<form th:action="@{/suppliers}" method="POST">
+		<table>
+			<tr>
+				<td>Name:</td>
+				<td>
+					<input type="text" name="name" placeholder="name..." />
+				</td>
+			</tr>
+			<tr>			
+				<td>Contact:</td>
+				<td>
+					<input type="text" name="contact" placeholder="contact..."/>
+				</td>
+			</tr>
+			<tr>			
+				<td>E-mail:</td>
+				<td>
+					<input type="email" name="email" placeholder="email..."/>
+				</td>
+			</tr>
+			<tr>			
+				<td>Phone:</td>
+				<td>
+					<input type="text" name="phone" placeholder="phone..."/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="submit" value="Add"/>
+				</td>
+			</tr>
+		</table>
+		<h3 th:if="${empty_field}">Please,fill all fields!</h3>
+	</form>
+		<br />
+		<hr />
+		<br />
+		<table>
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Contact</th>
+				<th>Email</th>
+				<th>Phone</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="supplier : ${suppliers}">
+				<td th:text="${supplier.name}">name</td>
+				<td th:text="${supplier.contact}">contact</td>
+				<td th:text="${supplier.email}">email</td>
+				<td th:text="${supplier.phone}">phone</td>
+				<td>
+					<form th:action="@{/supplier}" th:method="DELETE">
+						<input type="submit" value="Edit"/>	
+					</form>
+				</td>
+				<td>
+					<form th:action="@{/supplier}" th:method="DELETE">
+						<input type="submit" value="Delete"/>	
+					</form>
+				</td>
+			</tr>			
+		</tbody>
+	</table>	
+	</body>
+</html>
