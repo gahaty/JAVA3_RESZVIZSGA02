@@ -1,0 +1,49 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Termékek</title>
+</head>
+<body>
+<form th:action="@{/products}" method="POST">
+		<table>
+			<tr>
+				<td>név</td>
+				<td><input type="text" name="name"/></td>
+			</tr>
+			<tr>
+				<td>típusa:</td>
+				<td><input type="text" name="type"/></td>
+			</tr>
+			<tr>
+				<td>ár:</td>
+				<td><input type="text" name="price"/></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="mentés" /></td>
+			</tr>
+		</table>
+		<h3 th:if="${missing_field}">Everything is require</h3>
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Termék neve</th>
+				<th>Típus</th>
+				<th>Ár</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="product : ${products}">
+				<td th:text="${product.name}">név</td>
+				<td th:text="${product.type}">típus</td>
+				<td th:text="${product.price}">ár</td>
+				<td>
+				<a th:href="@{'/edit?productid='+${product.id}}">edit</a>
+				<a th:href="@{'/delete?productid='+${product.id}}">delete</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -61,5 +61,4 @@ public class SuppliersServlet extends HttpServlet {
 		System.out.println(suppliers.toString());
 		response.sendRedirect("/kisKosar/suppliers");
 	}
-
 }
