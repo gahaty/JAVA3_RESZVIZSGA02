@@ -58,14 +58,8 @@
 				<td th:text="${supplier.email}">email</td>
 				<td th:text="${supplier.phone}">phone</td>
 				<td>
-					<form th:action="@{/supplier}" th:method="DELETE">
-						<input type="submit" value="Edit"/>	
-					</form>
-				</td>
-				<td>
-					<form th:action="@{/supplier}" th:method="DELETE">
-						<input type="submit" value="Delete"/>	
-					</form>
+				<a th:href="@{'/edit_supplier?supplierid='+${supplier.id}}">edit</a>
+				<a th:href="@{'/delete_supplier?supplierid='+${supplier.id}}">delete</a>
 				</td>
 			</tr>			
 		</tbody>

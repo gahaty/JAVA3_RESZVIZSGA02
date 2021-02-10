@@ -16,7 +16,8 @@ import config.TemplateEngineUtil;
 import entities.Suppliers;
 import service.SmallBasketService;
 
-@WebServlet("/suppliers")
+//@WebServlet("/suppliers")
+@WebServlet(urlPatterns = { "/suppliers", "/delete_supplier", "/edit_supplier" })
 public class SuppliersServlet extends HttpServlet {
 
 	private final String EMPTY_FIELDS = "empty_field";
@@ -30,6 +31,11 @@ public class SuppliersServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		if (request.getServletPath().equals("/delete_supplier")) {
+			deleteSupplier(request, response);
+		}
+
 		TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
 		WebContext context = new WebContext(request, response, request.getServletContext());
 
@@ -58,7 +64,17 @@ public class SuppliersServlet extends HttpServlet {
 		suppliers.setEmail(email);
 		suppliers.setPhone(phone);
 		smallBasketService.addNewSuppliers(suppliers);
+
 		System.out.println(suppliers.toString());
 		response.sendRedirect("/kisKosar/suppliers");
+	}
+
+	protected void deleteSupplier(HttpServletRequest request, HttpServletResponse response){
+		int id = Integer.parseInt(request.getParameter("supplierid"));
+		try {
+			smallBasketService.deleteSupplier(id);
+		} catch (Exception ex) {
+			System.err.println("Error at upload: " + ex);
+		}
 	}
 }

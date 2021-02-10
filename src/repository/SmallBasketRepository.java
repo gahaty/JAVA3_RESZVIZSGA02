@@ -43,6 +43,7 @@ public class SmallBasketRepository {
 			rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				Suppliers suppliers = new Suppliers();
+				suppliers.setId(rs.getInt("id"));
 				suppliers.setName(rs.getString("name"));
 				suppliers.setContact(rs.getString("contact"));
 				suppliers.setEmail(rs.getString("email"));
@@ -71,6 +72,17 @@ public class SmallBasketRepository {
 			System.err.println("Error in add new supplier: " + ex);
 		}
 
+	}
+
+	public void deleteSupplier(int id) throws SQLException {
+		String query = "DELETE FROM suppliers WHERE id = ?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(query);
+			pstmt.setInt(1,id);
+			pstmt.execute();
+		} catch (SQLException ex) {
+			System.err.println("Error in delete supplier " + ex);
+		}
 	}
 
 	private void closeStatment(ResultSet rs, Statement stmt) {

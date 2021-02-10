@@ -13,7 +13,6 @@ import org.thymeleaf.context.WebContext;
 
 import config.TemplateEngineUtil;
 import entities.Product;
-import entities.Suppliers;
 import service.ProductService;
 
 @WebServlet(urlPatterns = { "/products", "/delete", "/edit" })

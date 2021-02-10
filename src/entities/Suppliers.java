@@ -2,21 +2,31 @@ package entities;
 
 public class Suppliers {
 
+	private Integer id;
 	private String name;
 	private String email;
 	private String contact;
 	private String phone;
+	//ár
 
 	public Suppliers() {
 
 	}
 
-	public Suppliers(String name, String email, String contact, String phone) {
-
+	public Suppliers(Integer id, String name, String email, String contact, String phone) {
+		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.contact = contact;
 		this.phone = phone;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getName() {
