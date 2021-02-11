@@ -60,19 +60,53 @@ public class ProductsRepository {
 		return products;
 	}
 	
+	public List<Product> findProductId(){
+		String query = "SELECT id from product ORDER BY id DESC LIMIT 1";
+		List<Product> products = new ArrayList<>();
+		Statement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			while (rs.next()){
+				Product product = new Product();
+				product.setId(rs.getInt("id"));
+				products.add(product);
+			}
+		} catch (Exception e) {
+			System.err.println("Failure in findProductId() :" + e);
+		} finally {
+			closeStatement(rs, stmt);
+		}
+		return products;
+	}
+	
 	public void addNewProducts(Product product) {
-		String query = "INSERT INTO product(name,type,price) VALUES (?,?,?)";
+		String query = "INSERT INTO product(name,type,price,supplier_price) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, product.getName());
 			pstmt.setString(2, product.getType());
 			pstmt.setInt(3, Integer.parseInt(product.getPrice()));
+			pstmt.setInt(4, Integer.parseInt(product.getSupplierPrice()));
 			pstmt.execute();
 		} catch (SQLException ex) {
 			System.err.println("Error in add new supplier: " + ex);
 		}
 	}
-
+	
+	public void addNewSuppliersProduct(Product product) {
+		String query = "INSERT INTO suppliers_product(product_id,supplier_id) VALUES (?,?)";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, product.getId());
+			pstmt.setInt(2, product.getSupplierId());
+			pstmt.execute();
+		} catch (SQLException ex) {
+			System.err.println("Error in add new SuppliersProduct: " + ex);
+		}
+	}
+	
 	public void deleteUser(int id) throws SQLException {
 		String query = "DELETE FROM product WHERE id = ?";
 		PreparedStatement pstmt = null;

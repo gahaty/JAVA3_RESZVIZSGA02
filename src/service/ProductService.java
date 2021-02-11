@@ -6,13 +6,16 @@ import java.util.List;
 import entities.Product;
 import entities.Suppliers;
 import repository.ProductsRepository;
+import repository.SmallBasketRepository;
 
 public class ProductService {
 	
 	private ProductsRepository repository;
+	private SmallBasketRepository repo;
 	
 	public ProductService() {
 		this.repository = new ProductsRepository();
+		this.repo = new SmallBasketRepository();
 	}
 	
 	public List<Product> listProducts(){
