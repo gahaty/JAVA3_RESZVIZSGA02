@@ -17,12 +17,11 @@ import config.TemplateEngineUtil;
 public class IndexServlet extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		WebContext context = new WebContext(request, response, request.getServletContext());
-
+		TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(request.getServletContext());
+		
 		engine.process("index.html", context, response.getWriter());
 	}
-
 }

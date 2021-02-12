@@ -1,0 +1,38 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Termékek</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<th>Termék név</th>
+				<th>Bekerülési ár</th>
+				<th>Eladási ár</th>
+				<th>Szállító neve</th>
+				<th>Kontakt</th>
+				<th>Email</th>
+				<th>Telefon</th>		
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="view : ${viewList}">
+				<td th:text="${view.name}"></td>
+				<td th:text="${view.supplierPrice} + ' Ft'"></td>
+				<td th:text="${view.price} + ' Ft'"></td>
+				<td th:text="${view.supplierName}"></td>
+				<td th:text="${view.contact}"></td>
+				<td th:text="${view.email}"></td>
+				<td th:text="${view.phone}"></td>
+			</tr>
+		</tbody>
+	</table>
+	<br />
+	<hr />
+	<br />
+	<a th:href="@{/products}">vissza</a>
+</body>
+</html>

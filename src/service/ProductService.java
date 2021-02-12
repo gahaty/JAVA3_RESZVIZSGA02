@@ -1,10 +1,8 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import entities.Product;
-import entities.Suppliers;
 import repository.ProductsRepository;
 import repository.SmallBasketRepository;
 
@@ -18,6 +16,10 @@ public class ProductService {
 		this.repo = new SmallBasketRepository();
 	}
 	
+	public Product findProductById(int id) {
+		return repository.findProductById(id);
+	}
+	
 	public List<Product> listProducts(){
 		return repository.findAllProduct();
 	}
@@ -26,8 +28,23 @@ public class ProductService {
 		repository.addNewProducts(product);
 	}
 	
-	public void deleteUser(int id) throws SQLException {
-		repository.deleteUser(id);
+	public void updateProduct(Product product) {
+		repository.updateProduct(product);
 	}
-
+	
+	public void updateSuppliersProduct(Product product) {
+		repository.updateSuppliersProduct(product);
+	}
+	
+	public void deleteProduct(int id) {
+		repository.deleteProduct(id);
+	}
+	
+	public void deleteSuppliersProduct(int id) {
+		repository.deleteSuppliersProduct(id);
+	}
+	
+	public Product findProductIdByMax() {
+		return repository.findProductIdByMax();
+	}
 }

@@ -6,56 +6,69 @@
 <title>Termékek</title>
 </head>
 <body>
-	<form th:action="@{/products}" method="POST">
+	<form th:action="@{/products}" th:object=${productEdit} method="POST">
 		<table>
 			<tr>
-				<td>név</td>
-				<td><input type="text" name="name" /></td>
+				<td><input type="hidden" name="id" th:field="*{id}"
+					th:value="*{id}" /></td>
 			</tr>
 			<tr>
-				<td>típusa:</td>
-				<td><input type="text" name="type" /></td>
+				<td>név:</td>
+				<td><input type="text" name="name" th:value="*{name}" /></td>
 			</tr>
 			<tr>
-				<td>ár:</td>
-				<td><input type="text" name="price" /></td>
+				<td>típus:</td>
+				<td><input type="text" name="type" th:value="*{type}" /></td>
 			</tr>
 			<tr>
-				<td>Szállító:</td>
+				<td>eladási ár:</td>
+				<td><input type="text" name="price" th:value="*{price}" /></td>
+			</tr>
+			<tr>
+				<td>szállító:</td>
 				<td><select name="supplier">
 						<option th:each="supplier : ${suppliers}"
 							th:text="${supplier.id} + ' ' + ${supplier.name}"></option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>beker ár:</td>
-				<td><input type="text" name="supplierPrice" /></td>
+				<td>bekerülési ár:</td>
+				<td><input type="text" name="supplierPrice"
+					th:value="*{supplierPrice}" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="mentés" /></td>
 			</tr>
-			
+
 			<tr>
 		</table>
-		<h3 th:if="${missing_field}">Everything is require</h3>
+		<h3 th:if="${missing_field}">A mezők kitöltése kötelező!</h3>
 	</form>
+	<br />
+	<hr />
+	<br />
 	<table>
 		<thead>
 			<tr>
-				<th>Termék neve</th>
-				<th>Típus</th>
-				<th>Ár</th>
+				<th>Termék név</th>
+				<th>Termék típus</th>
+				<th>Eladási ár</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr th:each="product : ${products}">
-				<td><a th:href="@{'/view?productid='+${product.id}}" th:text="${product.name}">név</a></td>
+				<td><a th:href="@{'/view?productid='+${product.id}}"
+					th:text="${product.name}">név</a></td>
 				<td th:text="${product.type}">típus</td>
-				<td th:text="${product.price}">ár</td>
-				<td><a th:href="@{'/edit?productid='+${product.id}}">edit</a> <a
-					th:href="@{'/delete?productid='+${product.id}}">delete</a></td>
+				<td th:text="${product.price} + ' Ft'">ár</td>
+				<td><a th:href="@{'/edit?productid='+${product.id}}">módosítás</a> <a
+					th:href="@{'/delete?productid='+${product.id}}">törlés</a></td>
 			</tr>
 		</tbody>
 	</table>
+	<br />
+	<hr />
+	<br />
+	<a th:href="@{/}">vissza</a>
 </body>
 </html>
