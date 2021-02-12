@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Termékek</title>
+<link rel="stylesheet" type="text/css" href="./static/main.css">
 </head>
 <body>
 	<form th:action="@{/products}" th:object=${productEdit} method="POST">
@@ -69,6 +70,6 @@
 	<br />
 	<hr />
 	<br />
-	<a th:href="@{/}">vissza</a>
+	<a th:href="@{/index}">vissza</a>
 </body>
 </html>

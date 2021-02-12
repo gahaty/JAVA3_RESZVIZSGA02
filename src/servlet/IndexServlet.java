@@ -13,7 +13,7 @@ import org.thymeleaf.context.WebContext;
 
 import config.TemplateEngineUtil;
 
-@WebServlet("/")
+@WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 
 	@Override
