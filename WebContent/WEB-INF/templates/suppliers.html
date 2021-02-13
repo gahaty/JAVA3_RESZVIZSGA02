@@ -1,69 +1,76 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"	xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Szállítók</title>
-	</head>
-	<link rel="stylesheet" type="text/css" href="./static/main.css"/>
-	<body>
-	<form th:action="@{/suppliers}" method="POST">
-		<table>
-			<tr>
-				<td>Name:</td>
-				<td>
-					<input type="text" name="name" placeholder="name..." />
-				</td>
-			</tr>
-			<tr>			
-				<td>Contact:</td>
-				<td>
-					<input type="text" name="contact" placeholder="contact..."/>
-				</td>
-			</tr>
-			<tr>			
-				<td>E-mail:</td>
-				<td>
-					<input type="email" name="email" placeholder="email..."/>
-				</td>
-			</tr>
-			<tr>			
-				<td>Phone:</td>
-				<td>
-					<input type="text" name="phone" placeholder="phone..."/>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<input type="submit" value="Add"/>
-				</td>
-			</tr>
-		</table>
-		<h3 th:if="${empty_field}">Please,fill all fields!</h3>
-	</form>
-		<br />
-		<hr />
-		<br />
-		<table>
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Contact</th>
-				<th>Email</th>
-				<th>Phone</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="supplier : ${suppliers}">
-				<td th:text="${supplier.name}">name</td>
-				<td th:text="${supplier.contact}">contact</td>
-				<td th:text="${supplier.email}">email</td>
-				<td th:text="${supplier.phone}">phone</td>
-				<td>
-				<a th:href="@{'/edit_supplier?supplierid='+${supplier.id}}">edit</a>
-				<a th:href="@{'/delete_supplier?supplierid='+${supplier.id}}">delete</a>
-				</td>
-			</tr>			
-		</tbody>
-	</table>	
-	</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Beszállítók</title>
+        <link rel="stylesheet" type="text/css" href="./static/main.css" />
+        <link rel="stylesheet" type="text/css" href="main.css" />
+    </head>
+    <body>
+        <form th:action="@{/suppliers}" th:object="${suppliers_edit}" method="POST">
+            <div class="form">
+                <table id="table">
+                    <tr>
+                        <td><input type="hidden" name="id" th:field="*{id}" th:value="*{id}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Név:</td>
+                        <td><input type="text" name="name" th:value="*{name}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Kapcsolat:</td>
+                        <td><input type="text" name="contact" th:value="*{contact}" /></td>
+                    </tr>
+                    <tr>
+                        <td>E-mail:</td>
+                        <td><input type="email" name="email" th:value="*{email}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Telefon:</td>
+                        <td><input type="text" name="phone" th:value="*{phone}" /></td>
+                    </tr>
+                </table>
+                <div class="add">
+                    <tr>
+                        <td><input type="submit" value="Mentés" /></td>
+                    </tr>
+                </div>
+            </div>
+            <h3 th:if="${empty_field}">A mezők kitöltése kötelező!</h3>
+        </form>
+
+        <br />
+        <hr />
+        <br />
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Név</th>
+                        <th>Kapcsolat</th>
+                        <th>E-mail</th>
+                        <th>Telefon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="supplier : ${suppliers}">
+                        <td th:text="${supplier.name}">Név</td>
+                        <td th:text="${supplier.contact}">Kapcsolat</td>
+                        <td th:text="${supplier.email}">E-mail</td>
+                        <td th:text="${supplier.phone}">Telefon</td>
+                        <td>
+                            <a th:href="@{'/edit_supplier?supplierid='+${supplier.id}}">Módosítás</a>
+                        </td>
+                        <td>
+                            <a th:href="@{'/delete_supplier?supplierid='+${supplier.id}}">Törlés</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <a th:href="@{/index}">Vissza</a>
+    </body>
 </html>

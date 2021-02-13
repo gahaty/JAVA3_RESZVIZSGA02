@@ -1,3 +1,4 @@
+/*
 body {
 	position: absolute;
 	top: 0;
@@ -5,4 +6,52 @@ body {
 	bottom: 0;
 	right: 0;
 	background-color: #f3f3f3;
+}*/
+body {
+	font-family: Verdana;
+	background-color: lightgray;
+}
+.form {
+	position: relative;
+	/*margin: 50px 540px;*/
+	margin: 0 auto;
+	border: solid 2px black;
+	width: fit-content;
+}
+h3 {
+	text-align: center;
+	color: red;
+}
+.table {
+	position: relative;
+	/*margin: 50px 500px;*/
+	margin: 0 auto;
+	border: solid 2px black;
+	width: max-content;
+}
+.add{
+	position: relative;
+	width: max-content;
+	margin: 0 auto;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+tr {
+	background-color: rgb(185, 185, 185);
+}
+td {
+	border: solid 2px black;
+	text-align: center;
+}
+th {
+	border: solid 2px black;
+	text-align: center;
+	width: fit-content;
+}
+input {
+	background-color: rgb(232, 235, 235);
+}
+a{
+  text-decoration: none;
+  color: black;
 }

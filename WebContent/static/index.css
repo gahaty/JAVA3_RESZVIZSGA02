@@ -1,0 +1,53 @@
+body {
+	font-family: Verdana;
+	background-color: lightgray;
+	margin: 0 auto;
+	padding-top: 10px;
+}
+h1 {
+	text-align: center;
+	font-weight: bold;
+}
+ul {
+	text-decoration: underline;
+	font-weight: bold;
+}
+blockquote {
+	text-align: left;
+}
+#text_and_links {
+	background-color: rgb(180, 180, 180);
+	border: 3px;
+	border-radius: 4px;
+	margin: 15px 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: auto;
+	height: auto;
+}
+div.main {
+	background-color: rgb(156, 156, 156);
+	border: 5px;
+	border-radius: 4px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin: 0 auto;
+}
+img {
+	position: relative;
+	width: 50px;
+	height: 50px;
+}
+#cart {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	margin-left: 10px;
+	margin-top: 10px;
+	/*top: 30px;
+	left: 200px;*/
+}
+a{
+  text-decoration: none;
+  color: black;
+}

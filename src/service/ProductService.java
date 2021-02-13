@@ -4,16 +4,16 @@ import java.util.List;
 
 import entities.Product;
 import repository.ProductsRepository;
-import repository.SmallBasketRepository;
+import repository.SuppliersRepository;
 
 public class ProductService {
 	
 	private ProductsRepository repository;
-	private SmallBasketRepository repo;
+	private SuppliersRepository repo;
 	
 	public ProductService() {
 		this.repository = new ProductsRepository();
-		this.repo = new SmallBasketRepository();
+		this.repo = new SuppliersRepository();
 	}
 	
 	public Product findProductById(int id) {

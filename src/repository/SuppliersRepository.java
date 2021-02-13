@@ -12,7 +12,7 @@ import java.util.Objects;
 
 import entities.Suppliers;
 
-public class SmallBasketRepository {
+public class SuppliersRepository {
 
 	private final String URL = "jdbc:mysql://127.0.0.1:3306/kiskosar";
 	private final String USERNAME = "root";
@@ -20,7 +20,7 @@ public class SmallBasketRepository {
 
 	private Connection connection;
 
-	public SmallBasketRepository() {
+	public SuppliersRepository() {
 		initConnection();
 	}
 
@@ -47,7 +47,7 @@ public class SmallBasketRepository {
 				suppliers.setName(rs.getString("name"));
 				suppliers.setContact(rs.getString("contact"));
 				suppliers.setEmail(rs.getString("email"));
-				suppliers.setPhone(rs.getString("phone"));
+				suppliers.setPhone(rs.getInt("phone"));
 				resultSuppliers.add(suppliers);
 			}
 		} catch (SQLException ex) {
@@ -66,7 +66,7 @@ public class SmallBasketRepository {
 			pstmt.setString(1, suppliers.getName());
 			pstmt.setString(2, suppliers.getContact());
 			pstmt.setString(3, suppliers.getEmail());
-			pstmt.setString(4, suppliers.getPhone());
+			pstmt.setInt(4, suppliers.getPhone());
 			pstmt.execute();
 		} catch (SQLException ex) {
 			System.err.println("Error in add new supplier: " + ex);
@@ -74,15 +74,51 @@ public class SmallBasketRepository {
 
 	}
 
-	public void deleteSupplier(int id) throws SQLException {
+	public void updateSupplier(Suppliers supplier) {
+		String query = "UPDATE suppliers SET name = ?, contact = ?, email = ?, phone = ? WHERE id = ?";
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(query);
+			pstmt.setString(1, supplier.getName());
+			pstmt.setString(2, supplier.getContact());
+			pstmt.setString(3, supplier.getEmail());
+			pstmt.setInt(4, supplier.getPhone());
+			pstmt.setInt(5, supplier.getId());
+			pstmt.execute();
+		} catch (SQLException ex) {
+			System.err.println("Error in update supplier " + ex);
+		}
+	}
+
+	public void deleteSupplier(int id) {
 		String query = "DELETE FROM suppliers WHERE id = ?";
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(query);
-			pstmt.setInt(1,id);
+			pstmt.setInt(1, id);
 			pstmt.execute();
 		} catch (SQLException ex) {
 			System.err.println("Error in delete supplier " + ex);
 		}
+	}
+
+	public Suppliers findSupplierById(int id) {
+		String query = "SELECT * FROM suppliers WHERE id = ?";
+		try {
+			PreparedStatement prepStmt = connection.prepareStatement(query);
+			prepStmt.setInt(1, id);
+			ResultSet rs = prepStmt.executeQuery();
+			while (rs.next()) {
+				Suppliers supplier = new Suppliers();
+				supplier.setId(rs.getInt("id"));
+				supplier.setName(rs.getString("name"));
+				supplier.setContact(rs.getString("contact"));
+				supplier.setEmail(rs.getString("email"));
+				supplier.setPhone(rs.getInt("phone"));
+				return supplier;
+			}
+		} catch (SQLException ex) {
+			System.err.println("Error in findSupplierById() :" + ex);
+		}
+		return null;
 	}
 
 	private void closeStatment(ResultSet rs, Statement stmt) {

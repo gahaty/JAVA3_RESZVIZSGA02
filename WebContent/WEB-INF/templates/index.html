@@ -1,27 +1,29 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>kisKosár</title>
-<link rel="stylesheet" type="text/css" href="./static/main.css"/>
-</head>
-<body>
-	<h1>Welcome to our website</h1>
-	<ul>
-		<li><a th:href="@{/suppliers}">Suppliers</a></li>
-		<li><a th:href="@{/products}">Termékek</a></li>
-	</ul>
-	<p>Pellentesque habitant morbi tristique senectus et netus et
-		malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat
-		vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet
-		quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat
-		eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
-		Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
-		wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum
-		rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in
-		turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus
-		faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat.
-		Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor,
-		facilisis luctus, metus</p>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>KisKosár</title>
+        <link rel="stylesheet" type="text/css" href="./static/index.css" />
+        <link rel="stylesheet" type="text/css" href="index.css" />
+    </head>
+    <body>
+        <div class="main">
+            <div id="cart">
+                <img src="cart.png" alt="Cart" />
+            </div>
+            <h1>Üdvözöljük a KisKosár Corp. weboldalán!</h1>
+            <div id="text_and_links">
+                <ul>
+                    <li><a th:href="@{/suppliers}">Beszállítók</a></li>
+                    <li><a th:href="@{/products}">Termékek</a></li>
+                </ul>
+                <blockquote>
+                    <p>
+                        Cégünk 2000-ben kezdte működését. Azóta több nagy beszállító partnerrel is szerződést kötöttünk. Ennek köszönhetően rendkívül széles termék palettával rendelekezünk. Olyan nagy hátterű cégekkel állunk kapcsolatban
+                        mint,a Nimfas Corp. és a Coimbra's Corp. Tekintse meg termékeinket,és mi biztosíthatjuk,hogy árainkban és termékeink minőségében nem fog csalódni. "Mert KisKosár,mindenből a legjobbat egy helyen !"
+                    </p>
+                </blockquote>
+            </div>
+        </div>
+    </body>
 </html>

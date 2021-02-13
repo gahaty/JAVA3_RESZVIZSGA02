@@ -14,31 +14,31 @@
 					th:value="*{id}" /></td>
 			</tr>
 			<tr>
-				<td>név:</td>
+				<td>Név:</td>
 				<td><input type="text" name="name" th:value="*{name}" /></td>
 			</tr>
 			<tr>
-				<td>típus:</td>
+				<td>Típus:</td>
 				<td><input type="text" name="type" th:value="*{type}" /></td>
 			</tr>
 			<tr>
-				<td>eladási ár:</td>
+				<td>Eladási ár:</td>
 				<td><input type="text" name="price" th:value="*{price}" /></td>
 			</tr>
 			<tr>
-				<td>szállító:</td>
+				<td>Szállító:</td>
 				<td><select name="supplier">
 						<option th:each="supplier : ${suppliers}"
 							th:text="${supplier.id} + ' ' + ${supplier.name}"></option>
 				</select></td>
 			</tr>
 			<tr>
-				<td>bekerülési ár:</td>
+				<td>Bekerülési ár:</td>
 				<td><input type="text" name="supplierPrice"
 					th:value="*{supplierPrice}" /></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="mentés" /></td>
+				<td><input type="submit" value="Mentés" /></td>
 			</tr>
 
 			<tr>

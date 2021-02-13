@@ -6,14 +6,13 @@ public class Suppliers {
 	private String name;
 	private String email;
 	private String contact;
-	private String phone;
-	//ár
+	private Integer phone;
 
 	public Suppliers() {
 
 	}
 
-	public Suppliers(Integer id, String name, String email, String contact, String phone) {
+	public Suppliers(Integer id, String name, String email, String contact, Integer phone) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
@@ -53,11 +52,11 @@ public class Suppliers {
 		this.contact = contact;
 	}
 
-	public String getPhone() {
+	public Integer getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
 

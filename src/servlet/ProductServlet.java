@@ -17,7 +17,7 @@ import config.TemplateEngineUtil;
 import entities.Product;
 import repository.ProductsRepository;
 import service.ProductService;
-import service.SmallBasketService;
+import service.SuppliersService;
 
 
 @WebServlet(urlPatterns = { "/products", "/delete", "/edit" })
@@ -27,12 +27,12 @@ public class ProductServlet extends HttpServlet {
 	private final String MISSING_FIELDS = "missing_field";
 
 	private ProductService productService;
-	private SmallBasketService smallBasketService;
+	private SuppliersService suppliersService;
 	private ProductsRepository productRepository;
 
 	public ProductServlet() {
 		this.productService = new ProductService();
-		this.smallBasketService = new SmallBasketService();
+		this.suppliersService = new SuppliersService();
 		this.productRepository = new ProductsRepository();
 	}
 
@@ -63,7 +63,7 @@ public class ProductServlet extends HttpServlet {
 
 		context.setVariable(MISSING_FIELDS, request.getParameter(MISSING_FIELDS));
 		context.setVariable("products", productService.listProducts());
-		context.setVariable("suppliers", smallBasketService.listAllSuppliers());
+		context.setVariable("suppliers", suppliersService.listAllSuppliers());
 		context.setVariable("productEdit", editableProduct);
 		engine.process("products.html", context, response.getWriter());
 	}
