@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
@@ -19,16 +20,19 @@ import repository.ProductsRepository;
 import service.ProductService;
 import service.SuppliersService;
 
-
 @WebServlet(urlPatterns = { "/products", "/delete", "/edit" })
 
 public class ProductServlet extends HttpServlet {
 
 	private final String MISSING_FIELDS = "missing_field";
+	private final String MISSING_FIELDS1 = "missing_field1";
+	private final String MISSING_FIELDS2 = "missing_field2";
 
 	private ProductService productService;
 	private SuppliersService suppliersService;
 	private ProductsRepository productRepository;
+	public boolean allMatch = true;
+	
 
 	public ProductServlet() {
 		this.productService = new ProductService();
@@ -62,6 +66,8 @@ public class ProductServlet extends HttpServlet {
 		}
 
 		context.setVariable(MISSING_FIELDS, request.getParameter(MISSING_FIELDS));
+		context.setVariable(MISSING_FIELDS1, request.getParameter(MISSING_FIELDS1));
+		context.setVariable(MISSING_FIELDS2, request.getParameter(MISSING_FIELDS2));
 		context.setVariable("products", productService.listProducts());
 		context.setVariable("suppliers", suppliersService.listAllSuppliers());
 		context.setVariable("productEdit", editableProduct);
@@ -79,9 +85,18 @@ public class ProductServlet extends HttpServlet {
 
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(type) || StringUtils.isBlank(price)
 				|| StringUtils.isBlank(supplierPrice)) {
+
 			response.sendRedirect("/kisKosar/products?" + MISSING_FIELDS + "=true");
 			return;
+		} else if (name.length() > 30 || type.length() > 30 || price.length() > 10 || supplierPrice.length() > 10) {
+			response.sendRedirect("/kisKosar/products?" + MISSING_FIELDS1 + "=true");
+			return;
+		} else if(isAllMatchPrice(price) == false || isAllMatchSupplierPrice(supplierPrice) == false ) {
+			response.sendRedirect("/kisKosar/products?" + MISSING_FIELDS2 + "=true");
+			return;
 		}
+		
+		
 
 		String supplier = request.getParameter("supplier");
 		String[] split = supplier.split(" ");
@@ -112,5 +127,25 @@ public class ProductServlet extends HttpServlet {
 			productService.updateSuppliersProduct(product);
 		}
 		response.sendRedirect("/kisKosar/products");
+	}
+
+	private Boolean isAllMatchPrice(String price) {
+		Character[] charObjectArray = price.chars().mapToObj(c -> (char) c).toArray(Character[]::new);
+		boolean actualStringIsNumber = Arrays.stream(charObjectArray).allMatch(c -> Character.isDigit(c));
+		if (!actualStringIsNumber) {
+            allMatch = false;
+            return false;
+        }
+		return true;
+	}
+	
+	private Boolean isAllMatchSupplierPrice(String supplierPrice) {
+		Character[] charObjectArray = supplierPrice.chars().mapToObj(c -> (char) c).toArray(Character[]::new);
+		boolean actualStringIsNumber = Arrays.stream(charObjectArray).allMatch(c -> Character.isDigit(c));
+		if (!actualStringIsNumber) {
+            allMatch = false;
+            return false;
+        }
+		return true;
 	}
 }

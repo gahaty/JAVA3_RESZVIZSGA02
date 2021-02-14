@@ -36,6 +36,8 @@
                 </div>
             </div>
             <h3 th:if="${empty_field}">A mezők kitöltése kötelező!</h3>
+            <h3 th:if="${missing_field1}">Túl sok karaktert adtál meg!</h3>
+            <h3 th:if="${missing_field2}">A telefon mezőbe csak szám kerülhet!</h3>
         </form>
 
         <br />

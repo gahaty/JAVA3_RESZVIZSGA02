@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,9 @@ import service.SuppliersService;
 public class SuppliersServlet extends HttpServlet {
 
 	private final String EMPTY_FIELDS = "empty_field";
+	private final String MISSING_FIELDS1 = "missing_field1";
+	private final String MISSING_FIELDS2 = "missing_field2";
+	public boolean allMatch = true;
 
 	private SuppliersService suppliersService;
 
@@ -50,6 +54,8 @@ public class SuppliersServlet extends HttpServlet {
 		WebContext context = new WebContext(request, response, request.getServletContext());
 
 		context.setVariable(EMPTY_FIELDS, request.getParameter(EMPTY_FIELDS));
+		context.setVariable(MISSING_FIELDS1, request.getParameter(MISSING_FIELDS1));
+		context.setVariable(MISSING_FIELDS2, request.getParameter(MISSING_FIELDS2));
 		context.setVariable("suppliers", suppliersService.listAllSuppliers());
 		context.setVariable("suppliers_edit", editableSupplier);
 		engine.process("suppliers.html", context, response.getWriter());
@@ -64,8 +70,15 @@ public class SuppliersServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
 
-		if (StringUtils.isAnyBlank(name, contact, email, phone)) {
+		if (StringUtils.isAnyBlank(name) || StringUtils.isAnyBlank(contact) || StringUtils.isAnyBlank(email) || StringUtils.isAnyBlank(phone)) {
 			response.sendRedirect("/kisKosar/suppliers?" + EMPTY_FIELDS + "=true");
+			return;
+		
+		} else if (name.length() >= 30 || contact.length() >= 30 || email.length() >= 30 || phone.length() >= 10) {
+			response.sendRedirect("/kisKosar/suppliers?" + MISSING_FIELDS1 + "=true");
+			return;
+		} else if(isAllMatchPhone(phone) == false) {
+			response.sendRedirect("/kisKosar/suppliers?" + MISSING_FIELDS2 + "=true");
 			return;
 		}
 
@@ -88,5 +101,13 @@ public class SuppliersServlet extends HttpServlet {
 
 		response.sendRedirect("/kisKosar/suppliers");
 	}
-
+	private Boolean isAllMatchPhone(String phone) {
+		Character[] charObjectArray = phone.chars().mapToObj(c -> (char) c).toArray(Character[]::new);
+		boolean actualStringIsNumber = Arrays.stream(charObjectArray).allMatch(c -> Character.isDigit(c));
+		if (!actualStringIsNumber) {
+            allMatch = false;
+            return false;
+        }
+		return true;
+	}
 }
