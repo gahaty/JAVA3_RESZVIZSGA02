@@ -31,7 +31,6 @@ public class SuppliersServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-//
 
 		Suppliers editableSupplier = null;
 
@@ -69,7 +68,7 @@ public class SuppliersServlet extends HttpServlet {
 			response.sendRedirect("/kisKosar/suppliers?" + EMPTY_FIELDS + "=true");
 			return;
 		}
-		
+
 		Suppliers suppliers = new Suppliers();
 		String parameter = request.getParameter("id");
 		if (StringUtils.isNotBlank(parameter)) {
@@ -80,7 +79,6 @@ public class SuppliersServlet extends HttpServlet {
 		suppliers.setEmail(email);
 		suppliers.setPhone(Integer.parseInt(phone));
 
-		System.out.println("updated supplier: " + suppliers);
 		if (Objects.isNull(suppliers.getId())) {
 			suppliersService.addNewSuppliers(suppliers);
 

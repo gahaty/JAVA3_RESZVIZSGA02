@@ -3,15 +3,14 @@
     <head>
         <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Beszállítók</title>
-        <link rel="stylesheet" type="text/css" href="./static/main.css" />
-        <link rel="stylesheet" type="text/css" href="main.css" />
+        <link rel="stylesheet" type="text/css" href="./static/main.css" />     
     </head>
     <body>
         <form th:action="@{/suppliers}" th:object="${suppliers_edit}" method="POST">
             <div class="form">
                 <table id="table">
-                    <tr>
-                        <td><input type="hidden" name="id" th:field="*{id}" th:value="*{id}" /></td>
+                    <tr id="trhidden">
+                        <td id="tdhidden"><input type="hidden" name="id" th:field="*{id}" th:value="*{id}" /></td>
                     </tr>
                     <tr>
                         <td>Név:</td>
@@ -71,6 +70,6 @@
         <br />
         <hr />
         <br />
-        <a th:href="@{/index}">Vissza</a>
+        <a id="back" th:href="@{/index}">Vissza</a>
     </body>
 </html>

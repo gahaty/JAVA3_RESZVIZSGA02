@@ -1,75 +1,76 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Termékek</title>
-<link rel="stylesheet" type="text/css" href="./static/main.css">
-</head>
-<body>
-	<form th:action="@{/products}" th:object=${productEdit} method="POST">
-		<table>
-			<tr>
-				<td><input type="hidden" name="id" th:field="*{id}"
-					th:value="*{id}" /></td>
-			</tr>
-			<tr>
-				<td>Név:</td>
-				<td><input type="text" name="name" th:value="*{name}" /></td>
-			</tr>
-			<tr>
-				<td>Típus:</td>
-				<td><input type="text" name="type" th:value="*{type}" /></td>
-			</tr>
-			<tr>
-				<td>Eladási ár:</td>
-				<td><input type="text" name="price" th:value="*{price}" /></td>
-			</tr>
-			<tr>
-				<td>Szállító:</td>
-				<td><select name="supplier">
-						<option th:each="supplier : ${suppliers}"
-							th:text="${supplier.id} + ' ' + ${supplier.name}"></option>
-				</select></td>
-			</tr>
-			<tr>
-				<td>Bekerülési ár:</td>
-				<td><input type="text" name="supplierPrice"
-					th:value="*{supplierPrice}" /></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Mentés" /></td>
-			</tr>
-
-			<tr>
-		</table>
-		<h3 th:if="${missing_field}">A mezők kitöltése kötelező!</h3>
-	</form>
-	<br />
-	<hr />
-	<br />
-	<table>
-		<thead>
-			<tr>
-				<th>Termék név</th>
-				<th>Termék típus</th>
-				<th>Eladási ár</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:each="product : ${products}">
-				<td><a th:href="@{'/view?productid='+${product.id}}"
-					th:text="${product.name}">név</a></td>
-				<td th:text="${product.type}">típus</td>
-				<td th:text="${product.price} + ' Ft'">ár</td>
-				<td><a th:href="@{'/edit?productid='+${product.id}}">módosítás</a> <a
-					th:href="@{'/delete?productid='+${product.id}}">törlés</a></td>
-			</tr>
-		</tbody>
-	</table>
-	<br />
-	<hr />
-	<br />
-	<a th:href="@{/index}">vissza</a>
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Termékek</title>
+        <link rel="stylesheet" type="text/css" href="./static/main.css" />
+    </head>
+    <body>
+        <form th:action="@{/products}" th:object="${productEdit}" method="POST">
+            <div class="form">
+                <table id="table">
+                    <tr id="trhidden">
+                        <td id="tdhidden"><input type="hidden" name="id" th:field="*{id}" th:value="*{id}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Név:</td>
+                        <td><input type="text" name="name" th:value="*{name}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Típus:</td>
+                        <td><input type="text" name="type" th:value="*{type}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Eladási ár:</td>
+                        <td><input type="text" name="price" th:value="*{price}" /></td>
+                    </tr>
+                    <tr>
+                        <td>Szállító:</td>
+                        <td>
+                            <select name="supplier">
+                                <option th:each="supplier : ${suppliers}" th:text="${supplier.id} + ' ' + ${supplier.name}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Bekerülési ár:</td>
+                        <td><input type="text" name="supplierPrice" th:value="*{supplierPrice}" /></td>
+                    </tr>
+                </table>
+                <div class="add">
+                    <tr>
+                        <td><input type="submit" value="Mentés" /></td>
+                    </tr>
+                </div>
+            </div>
+            <h3 th:if="${missing_field}">A mezők kitöltése kötelező!</h3>
+        </form>
+        <br />
+        <hr />
+        <br />
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Termék név</th>
+                        <th>Termék típus</th>
+                        <th>Eladási ár</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products}">
+                        <td><a th:href="@{'/view?productid='+${product.id}}" th:text="${product.name}">név</a></td>
+                        <td th:text="${product.type}">típus</td>
+                        <td th:text="${product.price} + ' Ft'">ár</td>
+                        <td><a th:href="@{'/edit?productid='+${product.id}}">Módosítás</a></td>
+                        <td><a th:href="@{'/delete?productid='+${product.id}}">Törlés</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <a id="back" th:href="@{/index}">Vissza</a>
+    </body>
 </html>

@@ -1,6 +1,6 @@
 body {
 	font-family: Verdana;
-	background-color: lightgray;
+	background-color: #f3f3f3;
 	margin: 0 auto;
 	padding-top: 10px;
 }
@@ -16,7 +16,7 @@ blockquote {
 	text-align: left;
 }
 #text_and_links {
-	background-color: rgb(180, 180, 180);
+	background-color: rgb(229, 229, 229);
 	border: 3px;
 	border-radius: 4px;
 	margin: 15px 15px;
@@ -26,7 +26,7 @@ blockquote {
 	height: auto;
 }
 div.main {
-	background-color: rgb(156, 156, 156);
+	background-color: rgb(218, 218, 218);
 	border: 5px;
 	border-radius: 4px;
 	padding-top: 10px;
@@ -44,8 +44,6 @@ img {
 	height: 20px;
 	margin-left: 10px;
 	margin-top: 10px;
-	/*top: 30px;
-	left: 200px;*/
 }
 a{
   text-decoration: none;

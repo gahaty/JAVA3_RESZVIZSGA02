@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2021. Feb 12. 21:37
+-- Létrehozás ideje: 2021. Feb 14. 11:18
 -- Kiszolgáló verziója: 10.4.14-MariaDB
 -- PHP verzió: 7.4.11
 
@@ -64,7 +64,15 @@ CREATE TABLE `suppliers` (
 
 INSERT INTO `suppliers` (`id`, `name`, `contact`, `email`, `phone`) VALUES
 (6, 'SpeedTransfer Kft.', 'Kis Tamás', 'kiss.tamas@gmail.com', 21683151),
-(7, 'SchnellProduct Inc.', 'Balázs Iván', 'balazs.ivan@gmail.com', 896516);
+(7, 'SchnellProduct Inc.', 'Balázs Iván', 'balazs.ivan@gmail.com', 896516),
+(24, 'Nimfas Corp.', 'Charlie Firpo', 'shipping@nimfas.com', 777888999),
+(25, 'Coimbra\'s Inc.', 'Bastiano Coimbra', 'shipping@coimbras.com', 666777888),
+(26, 'K1 Corp.', 'Mr. K1', 'shipping@k1.com', 555666777),
+(27, 'Futrinka Inc.', 'Futrinka Jenő', 'shipping@futrinka.hu', 444555666),
+(28, 'Fastest Sprinter Corp.', 'Barry Allen', 'shipping@fsprinter.com', 333444555),
+(29, 'GreenSmash Inc.', 'Bruce Banner', 'shipping@gsmash.com', 222333444),
+(30, 'Stark Industries Inc.', 'Tony Stark', 'shipping@sindustries.com', 111222333),
+(31, 'SuperSuper Corp.', 'Clark Kent', 'shipping@supersuper.com', 123456789);
 
 -- --------------------------------------------------------
 
@@ -119,19 +127,19 @@ ALTER TABLE `suppliers_product`
 -- AUTO_INCREMENT a táblához `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT a táblához `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT a táblához `suppliers_product`
 --
 ALTER TABLE `suppliers_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Megkötések a kiírt táblákhoz
